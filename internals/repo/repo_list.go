@@ -3,7 +3,7 @@ package repo
 import (
 	"fmt"
 
-	"github.com/ahmetsoykan/helm-rapport/internals/data"
+	"github.com/ahmetsoykan/argo-helm-rapport/internals/data"
 	"github.com/urfave/cli/v2"
 )
 

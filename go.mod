@@ -1,4 +1,4 @@
-module github.com/ahmetsoykan/helm-rapport
+module github.com/ahmetsoykan/argo-helm-rapport
 
 go 1.19
 

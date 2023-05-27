@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ahmetsoykan/helm-rapport/internals/repo"
+	"github.com/ahmetsoykan/argo-helm-rapport/internals/repo"
 	"github.com/urfave/cli/v2"
 )
 
