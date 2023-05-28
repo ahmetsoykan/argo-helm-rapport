@@ -25,7 +25,7 @@ func TestRepo(t *testing.T) {
 
 		app := &cli.App{
 			Name:     "test",
-			Usage:    "Shows you the chart differences",
+			Usage:    "Shows you the helm chart differences between versions",
 			Commands: Commands(),
 		}
 

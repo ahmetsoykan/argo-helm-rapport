@@ -46,7 +46,7 @@ func RepoAddAction(ctx *cli.Context) error {
 	if err != nil {
 		return err
 	} else {
-		fmt.Println("Repository saved.")
+		fmt.Println("Repository added.")
 	}
 	return nil
 }

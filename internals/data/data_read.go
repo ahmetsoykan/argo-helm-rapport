@@ -28,3 +28,23 @@ func GetRepositories() ([]Repository, error) {
 
 	return _repositories, nil
 }
+
+func GetWatchs() ([]Chart, error) {
+
+	if _, err := os.Stat(userDir + "watchs.json"); err != nil {
+		return []Chart{}, nil
+	}
+
+	file, err := os.ReadFile(userDir + "watchs.json")
+	if err != nil {
+		return nil, err
+	}
+
+	_charts := []Chart{}
+	err = json.Unmarshal(file, &_charts)
+	if err != nil {
+		return nil, err
+	}
+
+	return _charts, nil
+}
