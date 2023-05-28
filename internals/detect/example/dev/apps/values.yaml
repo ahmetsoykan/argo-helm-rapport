@@ -1,0 +1,14 @@
+myapp:
+  stage: dev
+  environment: bla
+  name: myapp
+  namespace: myapp
+  repoUrl: http://myapp.io/
+  project: myapp
+  prune: true
+  useHelm: false
+  plugin:
+    name: kustomized-helm
+    env:
+      - name: HELM_ARGS
+        value: "--set targetRevision=master -f ../../stage/values.yaml -f ./values.yaml"

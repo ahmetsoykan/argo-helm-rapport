@@ -1,0 +1,7 @@
+myapp:
+  stage: dev
+  environment: bla
+  name: myapp
+  namespace: myapp
+  repoUrl: http://myapp.io/
+  project: myapp

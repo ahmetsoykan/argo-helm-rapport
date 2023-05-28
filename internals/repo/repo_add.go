@@ -1,6 +1,7 @@
 package repo
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/ahmetsoykan/argo-helm-rapport/internals/data"
@@ -17,6 +18,10 @@ func RepoAddAction(ctx *cli.Context) error {
 	if private == "true" {
 		username := ctx.String("username")
 		password := ctx.String("password")
+
+		if (username == "") || (password == "") {
+			return errors.New("credentials need to be passed if the chart repository is private")
+		}
 
 		_repository = data.Repository{
 			Name:    name,
