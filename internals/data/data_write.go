@@ -41,13 +41,30 @@ func WriteWatchToFile(c Chart) error {
 	return nil
 }
 
-func WriteChartsToFile(a []App) error {
+func WriteChartsToFile(a []AppMeta) error {
 	file, err := json.MarshalIndent(a, "", " ")
 	if err != nil {
 		return err
 	}
 
 	_ = os.WriteFile(userDir+"charts.json", file, 0644)
+
+	return nil
+}
+
+func WriteYamlToFile(filename string, y []byte) error {
+	_ = os.WriteFile(userDir+filename, y, 0644)
+
+	return nil
+}
+
+func WriteAppsToFile(a map[string][]App) error {
+	file, err := json.MarshalIndent(a, "", " ")
+	if err != nil {
+		return err
+	}
+
+	_ = os.WriteFile(userDir+"apps.json", file, 0644)
 
 	return nil
 }

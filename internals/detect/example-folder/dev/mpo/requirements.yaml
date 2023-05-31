@@ -1,4 +1,0 @@
-dependencies:
-  - name: myapp
-    version: '0.15.2'
-    repository: '@chartmuseum'

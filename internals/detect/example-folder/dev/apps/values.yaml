@@ -1,8 +1,8 @@
-myapp:
+nginx-ingress:
   stage: dev
   environment: bla
-  name: myapp
-  namespace: myapp
+  name: nginx-ingress
+  namespace: default
   repoUrl: http://myapp.io/
   project: myapp
   prune: true
@@ -11,4 +11,4 @@ myapp:
     name: kustomized-helm
     env:
       - name: HELM_ARGS
-        value: "--set targetRevision=master -f ../../stage/values.yaml -f ./values.yaml"
+        value: "--set targetRevision=master -f ../values.yaml -f ./values.yaml"

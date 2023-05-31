@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/ahmetsoykan/argo-helm-rapport/internals/chart"
 	"github.com/ahmetsoykan/argo-helm-rapport/internals/detect"
 	"github.com/ahmetsoykan/argo-helm-rapport/internals/repo"
 	"github.com/ahmetsoykan/argo-helm-rapport/internals/watch"
@@ -25,6 +26,7 @@ func main() {
 	app.Commands = append(app.Commands, repo.Commands()...)
 	app.Commands = append(app.Commands, detect.Commands()...)
 	app.Commands = append(app.Commands, watch.Commands()...)
+	app.Commands = append(app.Commands, chart.Commands()...)
 
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)

@@ -1,6 +1,7 @@
 package detect
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -13,59 +14,166 @@ import (
 )
 
 var (
-	apps []data.App
+	apps = make(map[string][]data.App)
 )
 
 func DetectAction(ctx *cli.Context) error {
 
 	path := ctx.String("path")
 
-	// walk through all files under the given path
-	var filePaths []string
-	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+	watchedCharts, err := watch.GetWatchedCharts()
+	if err != nil {
+		return err
+	}
+
+	// we can find directories that match with watched chart names under the given folder
+	// assumption: chart names and folder names the same
+	chartPaths := make(map[string][]string)
+	err = filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 
-		// find apps folders and its application values
-		if strings.Contains(path, "apps") && strings.Contains(path, "values.yaml") {
-			filePaths = append(filePaths, path)
+		if info.IsDir() {
+			for _, chart := range watchedCharts {
+				if strings.Contains(path, chart.Name) {
+					chartPaths[chart.Name] = append(chartPaths[chart.Name], path)
+				}
+			}
 		}
-
 		return nil
 	})
 	if err != nil {
 		return err
 	}
 
-	// collect information about applications
-	for _, file := range filePaths {
-		f, err := os.ReadFile(file)
-		if err != nil {
-			log.Fatal(err)
+	// when the charts found, we can find one upper level directory to find "apps" folder
+	for k, v := range chartPaths {
+		for _, chartPath := range v {
+			splittedPath := strings.Split(chartPath, "/")
+			newPath := splittedPath[:len(splittedPath)-1]
+			apps[k] = append(apps[k], data.App{DirectoryPath: strings.Join(newPath, "/")})
 		}
-		var app data.App
-		if err := yaml.Unmarshal(f, &app); err != nil {
-			log.Fatal(err)
-		}
+	}
 
-		// filter charts detected
-		charts, err := watch.GetWatchedCharts()
-		if err != nil {
-			return err
-		}
-
-		for k, _ := range app {
-			for _, chart := range charts {
-				if chart.Name == k {
-					apps = append(apps, app)
+	// when we know the directory that has "apps" and actual chart directory, we can find the app setting file
+	// assumption: every chart directory has a apps dicrectory at the same level.
+	// assumption: every apps/values.yaml has a key with name of the chart
+	for k, v := range apps {
+		for i, app := range v {
+			err = filepath.Walk(app.DirectoryPath, func(path string, info os.FileInfo, err error) error {
+				if err != nil {
+					return err
 				}
+
+				if strings.Contains(path, "apps") && strings.Contains(path, "values.yaml") {
+
+					f, err := os.ReadFile(path)
+					if err != nil {
+						log.Fatal(err)
+					}
+
+					var metaData data.AppMeta
+					if err := yaml.Unmarshal(f, &metaData); err != nil {
+						log.Fatal(err)
+					}
+					v[i].Name = metaData[k].Name
+					v[i].Namespace = metaData[k].Namespace
+
+					// read values files from apps's values.yaml
+					var valuesEnv []string
+					if metaData[k].Plugin.Name == "kustomized-helm" {
+						for _, val := range metaData[k].Plugin.Env {
+							if val.Name == "HELM_ARGS" {
+								tempValues := strings.Split(val.Value, "-f")
+								if len(tempValues) < 1 && len(tempValues) > 2 {
+									valuesEnv = []string{"./values.yaml"}
+								} else {
+									valuesEnv = []string{tempValues[1], tempValues[2]}
+								}
+							}
+						}
+					} else {
+
+						if metaData[k].ValueFiles != nil {
+							valuesEnv = append(valuesEnv, metaData[k].ValueFiles...)
+						} else {
+							valuesEnv = []string{"./values.yaml"}
+						}
+					}
+
+					v[i].ValueFiles = valuesEnv
+
+					// reassign it
+					apps[k] = v
+				}
+
+				return nil
+			})
+			if err != nil {
+				return err
 			}
 		}
 	}
 
+	// we have: [a directory that has our chart, name, namespace to be deployed, values.yamls' relative paths]
+	// we can find the current version and the its chart repository with these information
+	// assumption: every chart has its own folder with the exact name match
+	for k, v := range apps {
+		for i, app := range v {
+			err = filepath.Walk(app.DirectoryPath+"/"+k, func(path string, info os.FileInfo, err error) error {
+				if err != nil {
+					return err
+				}
+
+				if strings.Contains(path, "requirements.yaml") {
+
+					f, err := os.ReadFile(path)
+					if err != nil {
+						log.Fatal(err)
+					}
+
+					var req data.Requirement
+					if err := yaml.Unmarshal(f, &req); err != nil {
+						log.Fatal(err)
+					}
+
+					for _, subcharts := range req.Dependencies {
+						if subcharts.Name == k {
+							v[i].ChartRepository = subcharts.Repository
+							v[i].Version = append(v[i].Version, subcharts.Version)
+						}
+					}
+
+					apps[k] = v
+				}
+
+				return nil
+			})
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	// minor changes
+	for k, v := range apps {
+		for i, app := range v {
+			// remove @ prefix from chart repository
+			apps[k][i].ChartRepository = strings.ReplaceAll(app.ChartRepository, "@", "")
+			// values file change to absolute from relative path
+			updatedValuesFiles := make([]string, 0)
+			for _, val := range app.ValueFiles {
+				val = strings.TrimSpace(val)
+				updatedValuesFiles = append(updatedValuesFiles, filepath.Join(app.DirectoryPath, fmt.Sprintf("./%s/", app.Name), val))
+			}
+			apps[k][i].ValueFiles = updatedValuesFiles
+		}
+	}
+	fmt.Printf("%+v", apps)
+
 	// Write found charts to as a file
-	err = data.WriteChartsToFile(apps)
+	err = data.WriteAppsToFile(apps)
 	if err != nil {
 		log.Fatal(err)
 	}

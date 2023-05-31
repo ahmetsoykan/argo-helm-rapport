@@ -12,7 +12,7 @@ func TestWatch(t *testing.T) {
 		got  []string
 		want error
 	}{
-		{name: "ChartWatchSucess", got: []string{"test", "watch", "chart", "--name", "myapp", "--prev", "0.15.2", "--curr", "0.15.3"}, want: nil},
+		{name: "ChartWatchSucess", got: []string{"test", "watch", "chart", "--name", "nginx-ingress"}, want: nil},
 	}
 
 	for _, c := range cases {

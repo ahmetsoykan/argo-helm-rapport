@@ -1,7 +1,10 @@
-myapp:
+nginx-ingress:
   stage: dev
   environment: bla
-  name: myapp
-  namespace: myapp
+  name: nginx-ingress
+  namespace: default
   repoUrl: http://myapp.io/
   project: myapp
+  valueFiles:
+  - ../values.yaml
+  - ./values.yaml

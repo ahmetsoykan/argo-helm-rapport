@@ -9,7 +9,7 @@ func Commands() (cmd []*cli.Command) {
 	cmd = []*cli.Command{
 		&cli.Command{
 			Name:  "watch",
-			Usage: "list the argo applications under the given path",
+			Usage: "set charts to be detected and rendered afterwards",
 			Subcommands: []*cli.Command{
 				&cli.Command{
 					Name:   "chart",
@@ -17,8 +17,6 @@ func Commands() (cmd []*cli.Command) {
 					Action: WatchChartAction,
 					Flags: []cli.Flag{
 						&cli.StringFlag{Name: "name", Required: true, Aliases: []string{"n"}},
-						&cli.StringFlag{Name: "prev", Required: true, Aliases: []string{"p"}},
-						&cli.StringFlag{Name: "curr", Required: true, Aliases: []string{"c"}},
 					},
 				},
 			},

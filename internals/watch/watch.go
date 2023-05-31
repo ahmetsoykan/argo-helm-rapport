@@ -11,13 +11,9 @@ func WatchChartAction(ctx *cli.Context) error {
 
 	var _chart data.Chart
 	name := ctx.String("name")
-	prev := ctx.String("prev")
-	curr := ctx.String("curr")
 
 	_chart = data.Chart{
 		Name: name,
-		Prev: prev,
-		Curr: curr,
 	}
 
 	err := data.WriteWatchToFile(_chart)

@@ -16,25 +16,44 @@ type Credentials struct {
 // watch package
 type Chart struct {
 	Name string `json:"name"`
-	Prev string `json"prev"`
-	Curr string `json"curr"`
 }
 
 type AppSpec struct {
-	Stage       string `yaml:"stage"`
-	Environment string `yaml:"environment"`
-	Name        string `yaml:"name"`
-	Namespace   string `yaml:"namespace"`
-	RepoURL     string `yaml:"repoUrl"`
-	Project     string `yaml:"project"`
-	UseHelm     bool   `yaml:"useHelm"`
+	Stage       string   `yaml:"stage"`
+	Environment string   `yaml:"environment"`
+	Name        string   `yaml:"name"`
+	Namespace   string   `yaml:"namespace"`
+	RepoURL     string   `yaml:"repoUrl"`
+	Project     string   `yaml:"project"`
+	UseHelm     bool     `yaml:"useHelm"`
+	ValueFiles  []string `yaml:"valueFiles"`
 	Plugin      struct {
 		Name string `yaml:"name"`
 		Env  []struct {
 			Name  string `yaml:"name"`
 			Value string `yaml:"value"`
 		} `yaml:"env"`
-	} `yaml:"plugin,omitempty"`
+	} `yaml:"plugin"`
+	Versions  []string `yaml:"versions,omitempty"`
+	ChartRepo string   `yaml:"chartRepo,omitempty"`
 }
 
-type App map[string]AppSpec
+type AppMeta map[string]AppSpec
+
+// detect
+type App struct {
+	DirectoryPath   string
+	Name            string
+	Namespace       string
+	ValueFiles      []string
+	ChartRepository string
+	Version         []string
+}
+
+type Requirement struct {
+	Dependencies []struct {
+		Name       string `yaml:"name"`
+		Version    string `yaml:"version"`
+		Repository string `yaml:"repository"`
+	} `yaml:"dependencies"`
+}
