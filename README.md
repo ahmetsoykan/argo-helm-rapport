@@ -17,18 +17,17 @@ This project aims to work as a pipeline tool to show manifest changes between th
 - User can set the charts to be monitored OK - [ Watch Pkg ] 
 - Tool authenticates the chart repositories OK - [ Chart Pkg ]
 - Tool templates the chart with the given informations in the argo app definition to a single file
+    - Charts can only have two version OK [ Chart pkg ]
     - helm render OK [ Chart pkg ]
+    - When the versions are the same, ignore rendering and comparing OK [ Chart pkg ]
     - combine two values.yaml into one OK [ Chart pkg]
+    - When the combined values are the same, ignore rendering and comparing OK [ Chart pkg ]
     - compare combined values yamls for the same version OK [ Detect and Chart pkg]
     - helm render + kustomize patch OK [ Chart pkg]
+    - Render should fail if the chart repository is unknown OK [ Chart pkg ]
+    - Compare should fail if there's no file mapping OK [ Chart pkg]
 - Tool compares two different rendered template OK - [ Chart pkg]
 - Print out the differences OK [ Chart pkg ]
-
-# Things to Consider
-- Charts can only have two version OK [ Chart pkg ]
-- When the versions are the same, ignore rendering and comparing OK [ Chart pkg ]
-- Render should fail if the chart repository is unknown OK [ Chart pkg ]
-- Compare should fail if there's no file mapping OK [ Chart pkg]
 
 
 # Usage
