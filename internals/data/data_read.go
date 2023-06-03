@@ -6,16 +6,17 @@ import (
 )
 
 var (
-	userDir string = "/tmp/"
+	UserDir string = "/tmp/"
 )
 
+// repo pkg datas
 func GetRepositories() ([]Repository, error) {
 
-	if _, err := os.Stat(userDir + "repositories.json"); err != nil {
+	if _, err := os.Stat(UserDir + "repositories.json"); err != nil {
 		return []Repository{}, nil
 	}
 
-	file, err := os.ReadFile(userDir + "repositories.json")
+	file, err := os.ReadFile(UserDir + "repositories.json")
 	if err != nil {
 		return nil, err
 	}
@@ -29,13 +30,14 @@ func GetRepositories() ([]Repository, error) {
 	return _repositories, nil
 }
 
+// watch pkg datas
 func GetWatchs() ([]Chart, error) {
 
-	if _, err := os.Stat(userDir + "watchs.json"); err != nil {
+	if _, err := os.Stat(UserDir + "watchs.json"); err != nil {
 		return []Chart{}, nil
 	}
 
-	file, err := os.ReadFile(userDir + "watchs.json")
+	file, err := os.ReadFile(UserDir + "watchs.json")
 	if err != nil {
 		return nil, err
 	}
@@ -49,40 +51,13 @@ func GetWatchs() ([]Chart, error) {
 	return _charts, nil
 }
 
-func GetCharts() ([]AppMeta, error) {
-	if _, err := os.Stat(userDir + "charts.json"); err != nil {
-		return []AppMeta{}, nil
-	}
-
-	file, err := os.ReadFile(userDir + "charts.json")
-	if err != nil {
-		return nil, err
-	}
-
-	_charts := []AppMeta{}
-	err = json.Unmarshal(file, &_charts)
-	if err != nil {
-		return nil, err
-	}
-
-	return _charts, nil
-}
-
-func ReadYamlFromFile(filename string) (string, error) {
-	data, err := os.ReadFile(userDir + filename)
-	if err != nil {
-		return "", err
-	}
-
-	return string(data), nil
-}
-
+// detects pkg - logs applications that detected, which render and compare works based on these findings
 func GetApps() (map[string][]App, error) {
-	if _, err := os.Stat(userDir + "apps.json"); err != nil {
+	if _, err := os.Stat(UserDir + "apps.json"); err != nil {
 		return map[string][]App{}, nil
 	}
 
-	file, err := os.ReadFile(userDir + "apps.json")
+	file, err := os.ReadFile(UserDir + "apps.json")
 	if err != nil {
 		return nil, err
 	}
@@ -94,4 +69,14 @@ func GetApps() (map[string][]App, error) {
 	}
 
 	return _apps, nil
+}
+
+// chart pkg - before compare to read rendered yaml files
+func ReadYamlFromFile(filename string) ([]byte, error) {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		return []byte{}, err
+	}
+
+	return data, nil
 }

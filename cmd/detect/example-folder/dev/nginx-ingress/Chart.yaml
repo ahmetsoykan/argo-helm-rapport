@@ -1,4 +1,6 @@
+name: nginx-ingress
+version: 0.1
 dependencies:
   - name: nginx-ingress
-    version: '1.41.2'
+    version: '1.41.1'
     repository: '@stable'

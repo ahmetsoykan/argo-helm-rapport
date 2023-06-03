@@ -1,6 +1,8 @@
 package chart
 
 import (
+	"io"
+
 	helmclient "github.com/mittwald/go-helm-client"
 )
 
@@ -14,7 +16,9 @@ func NewHelmClient() (HelmClient, error) {
 		Namespace:        "default",
 		RepositoryCache:  "/tmp/.helmcache",
 		RepositoryConfig: "/tmp/.helmrepo",
-		Debug:            true,
+		Debug:            false,
+		Linting:          false,
+		Output:           io.Discard,
 	}
 
 	client, err := helmclient.New(opt)

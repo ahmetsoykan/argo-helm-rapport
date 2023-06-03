@@ -1,5 +1,7 @@
 package data
 
+var ()
+
 // repo package
 type Repository struct {
 	Name        string      `json:"name"`
@@ -42,12 +44,18 @@ type AppMeta map[string]AppSpec
 
 // detect
 type App struct {
-	DirectoryPath   string
-	Name            string
-	Namespace       string
-	ValueFiles      []string
-	ChartRepository string
-	Version         []string
+	DirectoryPath             string
+	Name                      string
+	DependencyName            string
+	Namespace                 string
+	ValueFiles                []string
+	MergedValueFiles          [][]byte
+	ChartRepository           string
+	Versions                  []string
+	DiffVersions              bool
+	DiffValues                bool
+	RenderedFiles             []string
+	KustomizeComponentRepoURL string
 }
 
 type Requirement struct {
@@ -56,4 +64,11 @@ type Requirement struct {
 		Version    string `yaml:"version"`
 		Repository string `yaml:"repository"`
 	} `yaml:"dependencies"`
+}
+
+type KustomizePacth struct {
+	APIVersion string   `yaml:"apiVersion"`
+	Kind       string   `yaml:"kind"`
+	Resources  []string `yaml:"resources"`
+	Components []string `yaml:"components"`
 }

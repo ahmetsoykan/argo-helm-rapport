@@ -4,10 +4,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/ahmetsoykan/argo-helm-rapport/internals/chart"
-	"github.com/ahmetsoykan/argo-helm-rapport/internals/detect"
-	"github.com/ahmetsoykan/argo-helm-rapport/internals/repo"
-	"github.com/ahmetsoykan/argo-helm-rapport/internals/watch"
+	"github.com/ahmetsoykan/argo-helm-rapport/cmd/chart"
+	"github.com/ahmetsoykan/argo-helm-rapport/cmd/detect"
+	"github.com/ahmetsoykan/argo-helm-rapport/cmd/repo"
+	"github.com/ahmetsoykan/argo-helm-rapport/cmd/watch"
 
 	"github.com/urfave/cli/v2"
 )
