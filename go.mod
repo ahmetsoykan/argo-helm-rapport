@@ -3,9 +3,14 @@ module github.com/ahmetsoykan/argo-helm-rapport
 go 1.19
 
 require (
+	github.com/daviddengcn/go-algs v0.0.0-20180330170136-fe23fabd9d06
+	github.com/daviddengcn/go-colortext v1.0.0
+	github.com/daviddengcn/go-diff v0.0.0-20160111143540-f79304cd36e4
+	github.com/daviddengcn/go-villa v0.0.0-20200811194146-68107afb6d76
+	github.com/golangplus/fmt v1.0.0
+	github.com/golangplus/math v1.0.0
 	github.com/mittwald/go-helm-client v0.12.1
 	github.com/pkg/errors v0.9.1
-	github.com/sergi/go-diff v1.3.1
 	github.com/urfave/cli/v2 v2.25.5
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.12.0
@@ -51,6 +56,8 @@ require (
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/golangplus/bytes v1.0.0 // indirect
+	github.com/golangplus/sort v1.0.0 // indirect
 	github.com/google/btree v1.1.2 // indirect
 	github.com/google/gnostic v0.6.9 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
@@ -99,6 +106,7 @@ require (
 	github.com/rivo/uniseg v0.4.2 // indirect
 	github.com/rubenv/sql-migrate v1.3.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
+	github.com/sergi/go-diff v1.3.1 // indirect
 	github.com/shopspring/decimal v1.3.1 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/spf13/cast v1.5.0 // indirect

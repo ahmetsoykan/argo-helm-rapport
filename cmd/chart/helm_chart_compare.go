@@ -2,12 +2,9 @@ package chart
 
 import (
 	"bytes"
-	"errors"
-	"fmt"
 	"os"
 
 	"github.com/ahmetsoykan/argo-helm-rapport/internals/data"
-	"github.com/sergi/go-diff/diffmatchpatch"
 	"github.com/urfave/cli/v2"
 	"gopkg.in/yaml.v2"
 	"sigs.k8s.io/kustomize/api/filesys"
@@ -52,20 +49,7 @@ func ChartCompareAction(ctx *cli.Context) error {
 					_ = os.WriteFile(app.RenderedFiles[1], patchedData2, 0644)
 				}
 
-				dmp := diffmatchpatch.New()
-				text1, err := data.ReadYamlFromFile(app.RenderedFiles[0])
-				if err != nil {
-					return errors.New("please ensure the rendered file exists in /tmp folder, you can check details at /tmp/apps.json")
-				}
-				text2, err := data.ReadYamlFromFile(app.RenderedFiles[1])
-				if err != nil {
-					return errors.New("please ensure the rendered file exists in /tmp folder, you can check details at /tmp/apps.json")
-				}
-				diffs := dmp.DiffMain(string(text1), string(text2), false)
-
-				fmt.Println(app.DirectoryPath + "/" + app.Name)
-				fmt.Println(dmp.DiffPrettyText(diffs))
-				fmt.Println("---")
+				Exec(app.RenderedFiles[0], app.RenderedFiles[1], Options{})
 			}
 
 		}
