@@ -7,15 +7,16 @@ require (
 	github.com/daviddengcn/go-colortext v1.0.0
 	github.com/daviddengcn/go-diff v0.0.0-20160111143540-f79304cd36e4
 	github.com/daviddengcn/go-villa v0.0.0-20200811194146-68107afb6d76
+	github.com/golangplus/bytes v1.0.0
 	github.com/golangplus/fmt v1.0.0
 	github.com/golangplus/math v1.0.0
+	github.com/golangplus/testing v1.0.0
 	github.com/mittwald/go-helm-client v0.12.1
-	github.com/pkg/errors v0.9.1
 	github.com/urfave/cli/v2 v2.25.5
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.12.0
-	sigs.k8s.io/kustomize/api v0.13.4
 	sigs.k8s.io/kustomize/kustomize/v5 v5.0.3
+	sigs.k8s.io/kustomize/kyaml v0.14.2
 )
 
 require (
@@ -36,7 +37,7 @@ require (
 	github.com/cyphar/filepath-securejoin v0.2.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/docker/cli v20.10.21+incompatible // indirect
-	github.com/docker/distribution v2.8.1+incompatible // indirect
+	github.com/docker/distribution v2.8.2-beta.1+incompatible // indirect
 	github.com/docker/docker v20.10.24+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
@@ -56,7 +57,6 @@ require (
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
-	github.com/golangplus/bytes v1.0.0 // indirect
 	github.com/golangplus/sort v1.0.0 // indirect
 	github.com/google/btree v1.1.2 // indirect
 	github.com/google/gnostic v0.6.9 // indirect
@@ -99,6 +99,7 @@ require (
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0-rc2.0.20221005185240-3a7f492d3f1b // indirect
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_golang v1.14.0 // indirect
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
@@ -147,7 +148,7 @@ require (
 	k8s.io/utils v0.0.0-20230220204549-a5ecb0141aa5 // indirect
 	oras.land/oras-go v1.2.2 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
-	sigs.k8s.io/kustomize/kyaml v0.14.2 // indirect
+	sigs.k8s.io/kustomize/api v0.13.4 // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )

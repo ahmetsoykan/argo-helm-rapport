@@ -7,7 +7,7 @@ import (
 	"github.com/ahmetsoykan/argo-helm-rapport/internals/data"
 	"github.com/urfave/cli/v2"
 	"gopkg.in/yaml.v2"
-	"sigs.k8s.io/kustomize/api/filesys"
+	"sigs.k8s.io/kustomize/kyaml/filesys"
 	. "sigs.k8s.io/kustomize/kustomize/v5/commands/build"
 )
 

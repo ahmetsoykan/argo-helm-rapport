@@ -32,13 +32,13 @@ This project aims to work as a pipeline tool to show manifest changes between th
 
 # Usage
 - To start to use this tool see the example commands below:
-    ## chart repository authentication
-    - ./main repo add -n stable --host https://charts.helm.sh/stable
-    ## this is the repository that we will check from argo applications
-    - ./main watch chart -n nginx-ingress
-    ## search under the the app for apps folder and its values.yaml (run x2)
-    - ./main detect -p ./cmd/detect/example-folder
-    ## templates the files
-    - ./main chart render
-    ## compare the files
-    - ./main chart compare
+    - chart repository authentication
+        ##### ./main repo add -n stable --host https://charts.helm.sh/stable
+    - this is the repository that we will check from argo applications
+        ##### ./main watch chart -n nginx-ingress
+    - search under the the app for apps folder and its values.yaml (run x2 for your feature branch and master)
+        ##### ./main detect -p ./cmd/detect/example-folder
+    - templates the files
+        ##### ./main chart render
+    - compare the files
+        ##### ./main chart compare
