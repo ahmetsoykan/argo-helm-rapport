@@ -7,8 +7,10 @@ require (
 	github.com/daviddengcn/go-colortext v1.0.0
 	github.com/daviddengcn/go-diff v0.0.0-20160111143540-f79304cd36e4
 	github.com/daviddengcn/go-villa v0.0.0-20200811194146-68107afb6d76
+	github.com/golangplus/bytes v1.0.0
 	github.com/golangplus/fmt v1.0.0
 	github.com/golangplus/math v1.0.0
+	github.com/golangplus/testing v1.0.0
 	github.com/mittwald/go-helm-client v0.12.1
 	github.com/pkg/errors v0.9.1
 	github.com/urfave/cli/v2 v2.25.5
@@ -56,7 +58,6 @@ require (
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
-	github.com/golangplus/bytes v1.0.0 // indirect
 	github.com/golangplus/sort v1.0.0 // indirect
 	github.com/google/btree v1.1.2 // indirect
 	github.com/google/gnostic v0.6.9 // indirect
