@@ -1,9 +1,8 @@
-name: Upload Go test results
+name: Build
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:

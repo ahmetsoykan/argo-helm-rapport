@@ -12,7 +12,6 @@ require (
 	github.com/golangplus/math v1.0.0
 	github.com/golangplus/testing v1.0.0
 	github.com/mittwald/go-helm-client v0.12.1
-	github.com/pkg/errors v0.9.1
 	github.com/urfave/cli/v2 v2.25.5
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.12.0
@@ -100,6 +99,7 @@ require (
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0-rc2.0.20221005185240-3a7f492d3f1b // indirect
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_golang v1.14.0 // indirect
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect

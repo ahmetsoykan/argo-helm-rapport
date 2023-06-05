@@ -1,7 +1,8 @@
 package data
 
 import (
-	"github.com/pkg/errors"
+	"errors"
+
 	"gopkg.in/yaml.v2"
 )
 
@@ -23,7 +24,7 @@ func (opts *Options) MergeValues() (map[string]interface{}, error) {
 		}
 
 		if err := yaml.Unmarshal(bytes, &currentMap); err != nil {
-			return nil, errors.Wrapf(err, "failed to parse %s", filePath)
+			return nil, errors.New("failed to parse" + filePath + err.Error())
 		}
 		// Merge with the previous map
 		base = mergeMaps(base, currentMap)
