@@ -1,15 +1,10 @@
 name: Validate
 on: [push]
-# Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-on:
-  push:
-    branches: ["master"]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: ["master"]
 
-permissions: # added using https://github.com/step-security/secure-workflows
+permissions: 
   contents: read
+  # Details on https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors
+  # https://github.com/step-security/secure-workflows
 
 jobs:
   analyze:
