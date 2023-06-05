@@ -42,3 +42,10 @@ This project aims to work as a pipeline tool to show manifest changes between th
         ##### ./main chart render
     - compare the files
         ##### ./main chart compare
+
+# Flow
+
+<img
+  src="./img/flow.png"
+  title="Flow"
+  style="display: inline-block; margin: 0 auto; max-width: 300px max-height: 300px">
