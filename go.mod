@@ -11,7 +11,7 @@ require (
 	github.com/golangplus/fmt v1.0.0
 	github.com/golangplus/math v1.0.0
 	github.com/golangplus/testing v1.0.0
-	github.com/mittwald/go-helm-client v0.12.1
+	github.com/mittwald/go-helm-client v0.12.3
 	github.com/urfave/cli/v2 v2.25.7
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.12.1
